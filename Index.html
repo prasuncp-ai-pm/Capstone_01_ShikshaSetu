@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShikshaSetu - Master Capstone Portfolio (Consolidated)</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #0f172a;
+            --primary-light: #3b82f6;
+            --accent: #f97316;
+            --accent-light: #ffedd5;
+            --accent-green: #059669;
+            --accent-green-light: #d1fae5;
+            --accent-red: #dc2626;
+            --accent-red-light: #fee2e2;
+            --accent-purple: #7c3aed;
+            --accent-purple-light: #ede9fe;
+            --bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --callout-bg: #f8fafc;
+            --code-bg: #0f172a;
+            --code-text: #f8fafc;
+            --sidebar-width: 300px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.65;
+        }
+
+        /* Layout Structure */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left-Side Sticky Navigation Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            padding: 28px 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-brand .badge-tag {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.2);
+            color: var(--accent);
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(249, 115, 22, 0.4);
+        }
+
+        .sidebar-brand h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .sidebar-brand p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .nav-menu {
+            padding: 20px 14px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-grow: 1;
+        }
+
+        .nav-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-menu li a .nav-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #94a3b8;
+            flex-shrink: 0;
+        }
+
+        .nav-menu li a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+        }
+
+        .nav-menu li a.active {
+            background: var(--primary-light);
+            color: #ffffff;
+        }
+
+        .nav-menu li a.active .nav-num {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+
+        .sidebar-footer {
+            padding: 16px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        /* Right-Side Content Area */
+        .content-area {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            max-width: calc(100vw - var(--sidebar-width));
+        }
+
+        .portfolio-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        /* Master Header Banner */
+        .master-banner {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            border-bottom: 4px solid var(--accent);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        .badge-main {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .master-banner h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .master-banner p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        .banner-meta {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+
+        /* Collateral Document Container */
+        .doc-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+            scroll-margin-top: 24px;
+        }
+
+        .doc-section-header {
+            padding: 28px 36px 20px;
+            border-bottom: 1px solid var(--border);
+            background: #ffffff;
+        }
+
+        .collateral-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .doc-section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .doc-section-header p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .doc-section-body {
+            padding: 36px;
+        }
+
+        .section-block {
+            margin-bottom: 36px;
+        }
+
+        .section-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .block-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            border-left: 4px solid var(--primary-light);
+            padding-left: 12px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Generic Formatting Classes */
+        .callout-box {
+            background-color: var(--callout-bg);
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.92rem;
+            color: #334155;
+        }
+
+        .callout-box-accent {
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.92rem;
+            color: #9a3412;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pill-blue { background: #dbeafe; color: #1e40af; }
+        .pill-orange { background: var(--accent-light); color: #c2410c; }
+        .pill-green { background: var(--accent-green-light); color: var(--accent-green); }
+        .pill-red { background: var(--accent-red-light); color: var(--accent-red); }
+        .pill-purple { background: var(--accent-purple-light); color: #5b21b6; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.88rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px 16px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: var(--callout-bg);
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        /* PR / Working Backwards Styles */
+        .pr-box {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .pr-headline {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .pr-subhead {
+            font-size: 1.05rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .pr-dateline {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .pr-quote {
+            background: var(--callout-bg);
+            border-left: 4px solid var(--accent);
+            padding: 14px 18px;
+            font-style: italic;
+            margin: 18px 0;
+            border-radius: 0 8px 8px 0;
+            color: #334155;
+            font-size: 0.9rem;
+        }
+
+        .pr-quote span {
+            display: block;
+            font-style: normal;
+            font-weight: 600;
+            margin-top: 6px;
+            font-size: 0.82rem;
+            color: var(--primary);
+        }
+
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .faq-question {
+            background: var(--callout-bg);
+            padding: 12px 18px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--primary-dark);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-answer {
+            padding: 14px 18px;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        .moat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .moat-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px;
+            background: #ffffff;
+        }
+
+        .moat-card h4 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 6px 0;
+        }
+
+        .moat-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* SWOT Matrix Styles */
+        .swot-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 18px;
+            margin: 20px 0;
+        }
+
+        .swot-quadrant {
+            border-radius: 10px;
+            padding: 22px;
+            border: 1px solid var(--border);
+            background: #ffffff;
+        }
+
+        .quadrant-s { border-top: 5px solid var(--accent-green); background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 40%); }
+        .quadrant-w { border-top: 5px solid var(--accent-red); background: linear-gradient(180deg, #fef2f2 0%, #ffffff 40%); }
+        .quadrant-o { border-top: 5px solid var(--primary-light); background: linear-gradient(180deg, #eff6ff 0%, #ffffff 40%); }
+        .quadrant-t { border-top: 5px solid var(--accent); background: linear-gradient(180deg, #fff7ed 0%, #ffffff 40%); }
+
+        .quadrant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .quadrant-header h3 { font-size: 1.05rem; font-weight: 800; }
+        .quadrant-s h3 { color: var(--accent-green); }
+        .quadrant-w h3 { color: var(--accent-red); }
+        .quadrant-o h3 { color: var(--primary); }
+        .quadrant-t h3 { color: #c2410c; }
+
+        .swot-list { list-style: none; padding: 0; }
+        .swot-list li {
+            font-size: 0.85rem;
+            color: #334155;
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+            line-height: 1.4;
+        }
+        .swot-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .quadrant-s .swot-list li::before { color: var(--accent-green); }
+        .quadrant-w .swot-list li::before { color: var(--accent-red); }
+        .quadrant-o .swot-list li::before { color: var(--primary-light); }
+        .quadrant-t .swot-list li::before { color: var(--accent); }
+
+        /* Metric Grids */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: var(--callout-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .metric-val { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+        .metric-label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+        .metric-sub { font-size: 0.78rem; color: var(--text-main); margin-top: 4px; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin: 20px 0;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            background: #ffffff;
+        }
+
+        .card h4 { font-size: 1rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+        .card p { font-size: 0.88rem; color: #475569; line-height: 1.5; }
+
+        /* Persona Cards Styles */
+        .persona-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #ffffff;
+            margin-bottom: 24px;
+            overflow: hidden;
+            border-top: 5px solid var(--primary);
+        }
+
+        .persona-header {
+            display: flex;
+            padding: 22px;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            gap: 20px;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 95px;
+            height: 95px;
+            flex-shrink: 0;
+        }
+
+        .persona-avatar-img {
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 3px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            background-color: var(--callout-bg);
+        }
+
+        .location-tag {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            background: var(--primary-dark);
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            border: 1.5px solid #ffffff;
+        }
+
+        .persona-title h3 { font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 4px; font-weight: 800; }
+        .persona-title .archetype { font-size: 0.78rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        .persona-body {
+            padding: 22px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .persona-col h5 {
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .persona-col ul { padding-left: 16px; font-size: 0.85rem; color: #334155; line-height: 1.45; }
+        .quote-box {
+            font-style: italic;
+            color: #475569;
+            background: #fff7ed;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            font-size: 0.84rem;
+            margin-top: 10px;
+            border-radius: 0 4px 4px 0;
+            line-height: 1.4;
+        }
+
+        /* ELI5 Proposal Styles */
+        .story-box {
+            background: linear-gradient(180deg, #ffffff 0%, var(--callout-bg) 100%);
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .story-headline {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .milestone-timeline {
+            position: relative;
+            padding-left: 24px;
+            margin: 20px 0;
+            border-left: 3px solid var(--primary-light);
+        }
+
+        .milestone-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .milestone-item::before {
+            content: "";
+            position: absolute;
+            left: -31px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .milestone-item h4 { font-size: 0.95rem; color: var(--primary-dark); margin-bottom: 2px; }
+        .milestone-item p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* Technical Architecture Styles */
+        .arch-diagram {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 18px 0;
+        }
+
+        .arch-layer {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 12px;
+            background: var(--callout-bg);
+        }
+
+        .arch-layer-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+        }
+
+        .arch-node {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .arch-node h5 { font-size: 0.88rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 2px; }
+        .arch-node p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.35; }
+
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 14px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            margin: 12px 0;
+            border: 1px solid #334155;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 8px 14px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: -12px;
+            border: 1px solid #334155;
+            border-bottom: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+            .content-area { max-width: 100vw; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- LEFT-SIDE STICKY SIDEBAR -->
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <span class="badge-tag">AI Capstone</span>
+            <h2>ShikshaSetu</h2>
+            <p>Multilingual Socratic NCERT Tutor</p>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#sec-working-backwards" class="active"><span class="nav-num">1</span> Working Backwards Doc</a></li>
+            <li><a href="#sec-swot-analysis"><span class="nav-num">2</span> SWOT Analysis</a></li>
+            <li><a href="#sec-market-analysis"><span class="nav-num">3</span> Indian Market Analysis</a></li>
+            <li><a href="#sec-customer-segments"><span class="nav-num">4</span> Customer Segments</a></li>
+            <li><a href="#sec-cost-benefit"><span class="nav-num">5</span> Cost Benefit Analysis</a></li>
+            <li><a href="#sec-user-personas"><span class="nav-num">6</span> User Persona Analysis</a></li>
+            <li><a href="#sec-persona-cards"><span class="nav-num">7</span> Persona Cards</a></li>
+            <li><a href="#sec-project-plan"><span class="nav-num">8</span> End-2-End Project Plan</a></li>
+            <li><a href="#sec-technical-architecture"><span class="nav-num">9</span> Technical Architecture</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <span>CBSE/NEP 2020 Capstone Portfolio</span>
+        </div>
+    </nav>
+
+    <!-- RIGHT-SIDE SCROLLABLE CONTENT AREA -->
+    <main class="content-area">
+        <div class="portfolio-wrapper">
+
+            <!-- MASTER HEADER -->
+            <div class="master-banner">
+                <span class="badge-main">Master Capstone Documentation</span>
+                <h1>ShikshaSetu: AI Socratic Homework Companion</h1>
+                <p>Complete End-to-End Product Definition, Market Analysis, Architecture, and Execution Collaterals</p>
+                <div class="banner-meta">
+                    <span><strong>Project:</strong> ShikshaSetu</span>
+                    <span><strong>Stack:</strong> OpenAI, Astra Vector DB, Langflow, FastAPI</span>
+                    <span><strong>Scope:</strong> Class 6–10 NCERT STEM</span>
+                    <span><strong>Structure:</strong> 9 Integrated Collaterals</span>
+                </div>
+            </div>
+
+            <!-- ========================================================================= -->
+            <!-- 1. WORKING BACKWARDS DOC (COLLATERAL 1) -->
+            <!-- ========================================================================= -->
+            <section class="doc-section" id="sec-working-backwards">
+                <div class="doc-section-header">
+                    <span class="collateral-tag">Collateral #1</span>
+                    <h2>Working Backwards Document & Sustainable Product Moat</h2>
+                    <p>Amazon-Style Press Release, Customer/Internal FAQs, and Defensibility Framework</p>
+                </div>
+                <div class="doc-section-body">
+                    <!-- PR -->
+                    <div class="section-block">
+                        <div class="block-title">
+                            <span>1. Internal Press Release (Future Launch Date)</span>
+                            <span class="pill pill-blue">PR / FAQ</span>
+                        </div>
+                        <div class="pr-box">
+                            <h2 class="pr-headline">ShikshaSetu Launches AI-Powered Vernacular Socratic Tutor to End Rote Homework Copying for Millions of Indian Students</h2>
+                            <h3 class="pr-subhead">Groundbreaking Multimodal AI Guides Class 6–10 Students in Regional Languages Grounded in NCERT Syllabus—Without Handing Out Direct Answers.</h3>
+                            <p><span class="pr-dateline">NEW DELHI, INDIA</span> — Today marks the official unveiling of <strong>ShikshaSetu</strong>, a mobile-first generative AI learning companion built specifically for middle and secondary school students across India. Designed to support Tier-2, Tier-3, and rural learners navigating STEM subjects in bilingual or vernacular environments, ShikshaSetu turns passive homework struggle into conceptual discovery by applying the time-tested <em>Socratic method</em> over official NCERT textbook concepts.</p>
+                            <p style="margin-top: 12px;">For decades, millions of Indian school students facing challenging science and mathematics problems have had only two realistic options: unaffordable private tuition or commercial homework apps that act as rote answer keys. While traditional apps encourage students to blindly copy solutions, ShikshaSetu’s multimodal AI analyzes photos of textbook questions and diagrams, breaks down abstract concepts using native cultural analogies (such as explaining centripetal force via bicycle balance or village well pulleys), and leads students to the answer through progressive, gentle voice and text questions in their mother tongue.</p>
+                            <div class="pr-quote">
+                                "True education does not happen when a child is handed a pre-packaged answer; it happens in the 'Aha!' moment when they connect the dots themselves. With ShikshaSetu, we are delivering a 24/7 personal tutor into the hands of every student in Bharat—one that refuses to spoon-feed, respects their native language, and aligns strictly with the National Education Policy (NEP 2020) vision of conceptual inquiry."
+                                <span>— Lead Product Developer, ShikshaSetu Initiative</span>
+                            </div>
+                            <p>Fully compliant with CBSE and State Board curricula, ShikshaSetu addresses a vital demographic bottleneck: vernacular-medium students who understand everyday logic but stumble over dense English scientific terminology. By allowing students to speak or write in conversational Hindi, Hinglish, Tamil, or English, the application demystifies textbook jargon in real time.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQs -->
+                    <div class="section-block">
+                        <div class="block-title"><span>2. Stakeholder FAQs</span></div>
+                        <div class="faq-item">
+                            <div class="faq-question">Q: How is ShikshaSetu different from apps like Doubtnut, Brainly, or standard ChatGPT?</div>
+                            <div class="faq-answer">Commercial homework solvers operate as "solution search engines"—a student uploads a photo, and the app serves the complete, ready-to-copy solution. Standard ChatGPT often hallucinates or gives college-level explanations that overwhelm 13-year-olds. ShikshaSetu is strictly <strong>pedagogically constrained</strong>: it never reveals the final answer immediately. Instead, it diagnoses the student's exact point of confusion and offers bite-sized hints, vernacular analogies, and guiding questions grounded directly in NCERT Class 6–10 textbooks.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">Q: How does ShikshaSetu comply with India's DPDP Act 2023 for minors?</div>
+                            <div class="faq-answer">Since the target demographic includes users under 18, ShikshaSetu operates on a zero-PII retention model. Images uploaded are processed in memory and discarded immediately after OCR/vector extraction. User profiles require verifiable parental consent or anonymous guest session tokens, with zero behavioral ad tracking.</div>
+                        </div>
+                    </div>
+
+                    <!-- Moat -->
+                    <div class="section-block">
+                        <div class="block-title"><span>3. Sustainable Product Moat Framework</span></div>
+                        <div class="moat-grid">
+                            <div class="moat-card">
+                                <span class="pill pill-orange">Moat Pillar 1</span>
+                                <h4>Socratic Guardrail Architecture</h4>
+                                <p>A multi-turn state machine that tracks student cognitive stages (Confusion &rarr; Scaffolding &rarr; Mastery), refusing to leak answers.</p>
+                            </div>
+                            <div class="moat-card">
+                                <span class="pill pill-blue">Moat Pillar 2</span>
+                                <h4>NCERT Curricular Grounding</h4>
+                                <p>High-density vector indexing of Class 6–10 NCERT Science and Math in Astra Vector DB mapped to CBSE learning outcomes.</p>
+                            </div>
+                            <div class="moat-card">
+                                <span class="pill pill-green">Moat Pillar 3</span>
+                                <h4>Vernacular Analogy Bank</h4>
+                                <p>Proprietary repository of Indian mental models (e.g., cricket friction, bus inertia) indexed for generative synthesis.</p>
+                            </div>
+                            <div class="moat-card">
+                                <span class="pill pill-purple">Moat Pillar 4</span>
+                                <h4>Misconception Graph Flywheel</h4>
+                                <p>Continuous logging of common conceptual failure patterns among Indian students across specific chapters.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- 2. SWOT ANALYSIS (COLLATERAL 4) -->
+            <!-- ========================================================================= -->
+            <section class="doc-section" id="sec-swot-analysis">
+                <div class="doc-section-header">
+                    <span class="collateral-tag">Collateral #2</span>
+                    <h2>Comprehensive SWOT & TOWS Strategic Matrix</h2>
+                    <p>Internal Capabilities, External Market Forces, and Capstone Defense Arguments</p>
+                </div>
+                <div class="doc-section-body">
+                    <div class="swot-matrix">
+                        <div class="swot-quadrant quadrant-s">
+                            <div class="quadrant-header"><h3>Strengths (Internal)</h3><span class="pill pill-green">Advantages</span></div>
+                            <ul class="swot-list">
+                                <li><strong>Pedagogical Socratic Scaffolding:</strong> Prevents rote copying through strict anti-answer leak guardrails.</li>
+                                <li><strong>Curriculum-Bound RAG:</strong> Grounding in official NCERT Class 6–10 Science and Math via Astra DB.</li>
+                                <li><strong>Vernacular Dialect Adaptation:</strong> Conversational Hinglish, Hindi, and regional speech bridging textbook English.</li>
+                                <li><strong>Low Execution Cost:</strong> Two-tier LLM routing keeping inference cost under ₹0.35 ($0.004) per turn.</li>
+                            </ul>
+                        </div>
+                        <div class="swot-quadrant quadrant-w">
+                            <div class="quadrant-header"><h3>Weaknesses (Internal)</h3><span class="pill pill-red">Constraints</span></div>
+                            <ul class="swot-list">
+                                <li><strong>User Impatience / Friction:</strong> Students seeking quick homework shortcuts may abandon Socratic dialogue.</li>
+                                <li><strong>OCR on Crumpled/Faded Text:</strong> Vision models struggle on low-light photos of handwritten notebooks.</li>
+                                <li><strong>Multimodal Diagram Spatial Reasoning:</strong> Complex 2D/3D geometry or ray optics require high prompt complexity.</li>
+                                <li><strong>Non-Diagnostic Scope:</strong> Cannot detect underlying clinical learning disabilities.</li>
+                            </ul>
+                        </div>
+                        <div class="swot-quadrant quadrant-o">
+                            <div class="quadrant-header"><h3>Opportunities (External)</h3><span class="pill pill-blue">Tailwinds</span></div>
+                            <ul class="swot-list">
+                                <li><strong>NEP 2020 Policy Alignment:</strong> National shift toward competency-based, mother-tongue learning.</li>
+                                <li><strong>DIKSHA & State Board Integration:</strong> B2G expansion into state government public school portals.</li>
+                                <li><strong>Telecom & Hardware Bundling:</strong> Subsidized distribution via budget smartphones and 5G data packs.</li>
+                                <li><strong>B2B Institutional Licensing:</strong> Providing teacher analytics to budget private schools.</li>
+                            </ul>
+                        </div>
+                        <div class="swot-quadrant quadrant-t">
+                            <div class="quadrant-header"><h3>Threats (External)</h3><span class="pill pill-orange">Risks</span></div>
+                            <ul class="swot-list">
+                                <li><strong>Foundation Model Improvements:</strong> Direct upgrades to GPT-5 / Gemini with native tutor modes.</li>
+                                <li><strong>Incumbent EdTech Defensibility:</strong> Players like Doubtnut or PhysicsWallah adding generative wrappers.</li>
+                                <li><strong>DPDP Act 2023 Compliance Rigor:</strong> Stringent parental consent compliance for minors under 18.</li>
+                                <li><strong>Low Direct Consumer WTP:</strong> Tier-3/4 parents often resist recurring software subscriptions.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="section-block" style="margin-top: 24px;">
+                        <div class="block-title"><span>TOWS Strategic Synthesis</span><span class="pill pill-purple">Strategy Playbook</span></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Direction</th>
+                                    <th>Opportunities (O)</th>
+                                    <th>Threats (T)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Strengths (S)</strong></td>
+                                    <td><strong>S-O Strategy:</strong> Package Socratic NCERT engine as a certified NEP-compliant module for state board portals (DIKSHA).</td>
+                                    <td><strong>S-T Strategy:</strong> Establish deep defensibility through proprietary Indian misconception graphs and zero-PII architecture.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Weaknesses (W)</strong></td>
+                                    <td><strong>W-O Strategy:</strong> Integrate gamified "Streak & Curiosity Points" to convert Socratic friction into positive reinforcement.</td>
+                                    <td><strong>W-T Strategy:</strong> Implement client-side image quality pre-checkers (PWA) to prompt for clearer photos before API calls.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- 3. INDIAN MARKET ANALYSIS (COLLATERAL 5) -->
+            <!-- ========================================================================= -->
+            <section class="doc-section" id="sec-market-analysis">
+                <div class="doc-section-header">
+                    <span class="collateral-tag">Collateral #3</span>
+                    <h2>Indian Market Analysis & Addressable Opportunity</h2>
+                    <p>Macro Environment, Structural EdTech Shifts, and TAM/SAM/SOM Sizing</p>
+                </div>
+                <div class="doc-section-body">
+                    <div class="metric-grid">
+                        <div class="metric-card">
+                            <div class="metric-val">250M+</div>
+                            <div class="metric-label">Total Indian K-12 Students</div>
+                            <div class="metric-sub">Total Addressable Market (TAM)</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-val">68M</div>
+                            <div class="metric-label">Class 6–10 STEM Students</div>
+                            <div class="metric-sub">Serviceable Available Market (SAM)</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-val">12.5M</div>
+                            <div class="metric-label">Vernacular Smart Users</div>
+                            <div class="metric-sub">Serviceable Obtainable Market (SOM)</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-val">₹250–500</div>
+                            <div class="metric-label">Monthly Affordability</div>
+                            <div class="metric-sub">Tier-2/3 Household Budget</div>
+                        </div>
+                    </div>
+
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>1. National Education Policy (NEP 2020) Mandates</h4>
+                            <p>The NEP 2020 and National Curriculum Framework explicitly mandate a shift from rote memorization to inquiry-driven learning and primary-language instruction. School exams are transitioning toward higher-order thinking skills (HOTS), reducing the efficacy of static solution keys.</p>
+                        </div>
+                        <div class="card">
+                            <h4>2. Post-Hype EdTech Unbundling</h4>
+                            <p>Indian families have largely rejected high-ticket, locked annual packages (₹40,000–₹80,000/yr). Post-consolidation consumer behavior favors high-utility, bite-sized, low-friction digital companions with transparent micro-subscriptions.</p>
+                        </div>
+                        <div class="card">
+                            <h4>3. Vernacular Smartphone Penetration</h4>
+                            <p>Over 80% of new smartphone users in India access content in regional languages. While English remains the primary medium for textbooks, actual cognitive comprehension occurs in Hindi, Hinglish, Tamil, or Marathi.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- 4. CUSTOMER SEGMENT ANALYSIS (COLLATERAL 6) -->
+            <!-- ========================================================================= -->
+            <section class="doc-section" id="sec-customer-segments">
+                <div class="doc-section-header">
+                    <span class="collateral-tag">Collateral #4</span>
+                    <h2>Customer Segment Analysis & JTBD Framework</h2>
+                    <p>Triangular Stakeholder Network: Student, Parent, and Teacher Dynamics</p>
+                </div>
+                <div class="doc-section-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 20%;">Customer Segment</th>
+                                <th style="width: 25%;">Profile & Context</th>
+                                <th style="width: 30%;">Jobs to Be Done (JTBD)</th>
+                                <th style="width: 25%;">WTP & Channel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Primary Segment:<br>Tier-2/3 Students (Class 6–10)</strong></td>
+                                <td>CBSE/State Board students transitioning to English textbooks; lack access to 1-on-1 tutoring.</td>
+                                <td><em>"When I get stuck on science diagrams or math formulas at 9 PM, help me understand the logic in Hindi without making me feel unintelligent."</em></td>
+                                <td><strong>WTP:</strong> ₹0 (User, not buyer).<br><strong>Channel:</strong> WhatsApp Bot, Mobile PWA, School peer sharing.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Secondary Segment:<br>Aspirational Parents</strong></td>
+                                <td>Small business owners, government clerks, salaried parents earning ₹25k–₹60k/month.</td>
+                                <td><em>"Ensure my child scores well in board exams and understands concepts, without spending ₹2,000/month per subject on coaching."</em></td>
+                                <td><strong>WTP:</strong> ₹149–₹299/mo micro-sub.<br><strong>Channel:</strong> UPI micro-payments, WhatsApp parental progress reports.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tertiary Segment:<br>Budget Private Schools</strong></td>
+                                <td>Low-fee private schools charging ₹800–₹2,500/mo fees with high student-to-teacher ratios (45:1).</td>
+                                <td><em>"Provide our teachers with structured homework diagnostic insights and stop students from submitting copied assignments."</em></td>
+                                <td><strong>WTP:</strong> ₹25–₹40 per student/mo (B2B).<br><strong>Channel:</strong> School administration licensing.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- 5. COST BENEFIT ANALYSIS (COLLATERAL 7) -->
+            <!-- ========================================================================= -->
+            <section class="doc-section" id="sec-cost-benefit">
+                <div class="doc-section-header">
+                    <span class="collateral-tag">Collateral #5</span>
+                    <h2>Cost-Benefit Analysis & Cloud Unit Economics</h2>
+                    <p>API Breakdown, Household Cost Comparison, and Break-Even Viability</p>
+                </div>
+                <div class="doc-section-body">
+                    <div class="callout-box">
+                        <strong>Unit Economics Target:</strong> To achieve commercial and academic sustainability in India, the cost per student learning session must remain strictly below ₹1.50 ($0.018), enabling a viable ₹149/month freemium subscription model.
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Architecture Component</th>
+                                <th>Service / Provider</th>
+                                <th>Consumption Metric</th>
+                                <th>Cost per Unit (INR / USD)</th>
+                                <th>Cost per Session</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Vision OCR & Entity Parsing</strong></td>
+                                <td>OpenAI GPT-4o-mini / Gemini 2.5 Flash</td>
+                                <td>1 image + 400 prompt tokens</td>
+                                <td>₹0.12 ($0.0015) / call</td>
+                                <td>₹0.12</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vector Search & Storage</strong></td>
+                                <td>DataStax Astra Vector DB (Serverless)</td>
+                                <td>1 vector search + text-embedding-3-small</td>
+                                <td>₹0.02 ($0.00025) / query</td>
+                                <td>₹0.02</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Socratic Dialogue Reasoning</strong></td>
+                                <td>GPT-4o-mini (3-turn guided flow)</td>
+                                <td>Avg. 600 input / 250 output tokens</td>
+                                <td>₹0.18 ($0.0022) / 3 turns</td>
+                                <td>₹0.18</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Audio Synthesis (TTS)</strong></td>
+                                <td>Bhashini Speech APIs / Google Cloud TTS</td>
+                                <td>80 characters converted to speech</td>
+                                <td>₹0.06 ($0.0007) / audio</td>
+                                <td>₹0.06</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hosting & API Compute</strong></td>
+                                <td>FastAPI on Railway / AWS Lambda</td>
+                                <td>Compute & egress bandwidth</td>
+                                <td>₹0.04 ($0.0005) / session</td>
+                                <td>₹0.04</td>
+                            </tr>
+                            <tr style="background-color: var(--callout-bg); font-weight: bold;">
+                                <td colspan="4">Total Direct Cost per Completed Homework Session (5 Turns)</td>
+                                <td>₹0.42 ($0.005)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>Household ROI vs. Private Coaching</h4>
+                            <p>An average Tier-2 Indian household pays <strong>₹1,500–₹3,000/month</strong> for local offline coaching centers. ShikshaSetu provides 24/7 personalized Socratic support at <strong>₹149/month</strong>, delivering a <strong>90%+ direct cost reduction</strong> for families.</p>
+                        </div>
+                        <div class="card">
+                            <h4>Break-Even & Gross Margin</h4>
+                            <p>With an estimated monthly usage of 60 sessions per student (₹25.20 in direct API costs), a ₹149/month subscription yields a <strong>gross margin of ~83%</strong>, ensuring financial sustainability.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- 6. USER PERSONA ANALYSIS (COLLATERAL 8) -->
+            <!-- ========================================================================= -->
+            <section class="doc-section" id="sec-user-personas">
+                <div class="doc-section-header">
+                    <span class="collateral-tag">Collateral #6</span>
+                    <h2>User Persona Analysis (Psychographic & Behavioral)</h2>
+                    <p>In-Depth Profiles of Student, Parent, and Teacher Archetypes</p>
+                </div>
+                <div class="doc-section-body">
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>Persona 1: The Struggling Aspirant (Student)</h4>
+                            <p><strong>Name:</strong> Aarav Sharma (14 yrs, Class 9, Alwar, Rajasthan)<br>
+                            <strong>Academic Context:</strong> Studying in a semi-English medium CBSE school. Thinks in Hindi, struggles with physics numericals and algebra.<br>
+                            <strong>Frustration:</strong> Gets stuck doing homework at night; feels intimidated to ask doubts in a crowded 50-student classroom; copies answers before morning assembly.<br>
+                            <strong>Desired Outcome:</strong> Clear concepts without fear, score 80%+ in school exams, and feel smart in front of friends.</p>
+                        </div>
+                        <div class="card">
+                            <h4>Persona 2: The Stressed Enabler (Parent)</h4>
+                            <p><strong>Name:</strong> Rajesh Sharma (44 yrs, Small Hardware Store Owner, Alwar)<br>
+                            <strong>Socio-Economic Context:</strong> Monthly income ₹38,000. Studied up to Class 10 in Hindi medium. Highly aspirational for his children.<br>
+                            <strong>Frustration:</strong> Cannot explain Class 9 science in English; worried about spending ₹2,500/month on coaching; fears his child is just memorizing.<br>
+                            <strong>Desired Outcome:</strong> An affordable, trustworthy study helper that keeps his child disciplined and provides visible weekly progress.</p>
+                        </div>
+                        <div class="card">
+                            <h4>Persona 3: The Overworked Educator (Teacher)</h4>
+                            <p><strong>Name:</strong> Smt. Meenakshi Sundaram (38 yrs, Science Teacher, Madurai)<br>
+                            <strong>Professional Context:</strong> Teaches 4 sections of Class 8 & 9 (200+ students total) in a budget private school.<br>
+                            <strong>Frustration:</strong> Correcting 200 homework notebooks only to find identical copied answers from Doubtnut; lacks time for 1-on-1 remedial teaching.<br>
+                            <strong>Desired Outcome:</strong> Students who come to class understanding basic prerequisites, allowing her to conduct engaging experiments.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- 7. PERSONA CARDS (COLLATERAL 9) -->
+            <!-- ========================================================================= -->
+            <section class="doc-section" id="sec-persona-cards">
+                <div class="doc-section-header">
+                    <span class="collateral-tag">Collateral #7</span>
+                    <h2>Visual Persona Cards with Grounded Indian Imagery</h2>
+                    <p>Empathy Maps, Contextual Photos, and Feature-Level Alignment</p>
+                </div>
+                <div class="doc-section-body">
+                    <!-- PERSONA 1: AARAV -->
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div class="avatar-container">
+                                <img 
+                                    class="persona-avatar-img" 
+                                    src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQnguI-_W3b5kCXnX8jhZ6LczDu5tcZhPpSJEQfciJ_6jbxRsEFoZwznnN1EQCwto1ObUZN764YY2lcVKw" 
+                                    alt="Aarav Sharma - 14 year old Indian Student from Alwar, Rajasthan"
+                                />
+                                <span class="location-tag">Alwar</span>
+                            </div>
+                            <div class="persona-title">
+                                <span class="archetype">Primary User Persona (Student)</span>
+                                <h3>Aarav Sharma • 14 yrs (Class 9 Student)</h3>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Alwar, Rajasthan • Semi-English Medium CBSE School • Shared Android Phone User</p>
+                            </div>
+                        </div>
+                        <div class="persona-body">
+                            <div class="persona-col">
+                                <h5>Pain Points & Anxieties</h5>
+                                <ul>
+                                    <li>Freezes when solving multi-step Physics numericals (Gravitation, Laws of Motion).</li>
+                                    <li>Hesitates to ask doubts in a crowded classroom of 50 students.</li>
+                                    <li>Tempted to copy solutions from guidebooks just to avoid homework punishment.</li>
+                                </ul>
+                                <div class="quote-box">"Jab formula samajh nahi aata, toh mann karta hai bas kahin se answer mil jaye aur homework khatam ho."</div>
+                            </div>
+                            <div class="persona-col">
+                                <h5>Empathy & Behavior Map</h5>
+                                <ul>
+                                    <li><strong>Thinks:</strong> "I understand when Sir explains in Hindi, but textbook English confuses me."</li>
+                                    <li><strong>Uses:</strong> Redmi smartphone (shared with mother), WhatsApp, YouTube.</li>
+                                    <li><strong>Motivator:</strong> Wants to feel smart and score 85%+ in final board exams.</li>
+                                </ul>
+                            </div>
+                            <div class="persona-col">
+                                <h5>ShikshaSetu Feature Alignment</h5>
+                                <ul>
+                                    <li><strong>Hinglish Voice Clues:</strong> Conversational Hindi audio clues make science intuitive.</li>
+                                    <li><strong>Socratic Micro-Steps:</strong> Solves 1 variable at a time without feeling overwhelmed.</li>
+                                    <li><strong>Zero-Shame Learning:</strong> Safe, private space to ask fundamental doubts without judgment.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PERSONA 2: RAJESH -->
+                    <div class="persona-card" style="border-top-color: var(--accent);">
+                        <div class="persona-header">
+                            <div class="avatar-container">
+                                <img 
+                                    class="persona-avatar-img" 
+                                    src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSCVq5IxPExJCVPpB61azVbDvneWnTvBkgmzMXMc25_8Cth7DkKp_RX_XonW5EFKl7gUKvEFT6sNTWK_E8" 
+                                    alt="Rajesh Sharma - 44 year old Indian parent and small business owner from Alwar"
+                                />
+                                <span class="location-tag" style="background: #c2410c;">Alwar</span>
+                            </div>
+                            <div class="persona-title">
+                                <span class="archetype" style="color: var(--accent);">Economic Buyer Persona (Parent)</span>
+                                <h3>Rajesh Sharma • 44 yrs (Parent & Small Trader)</h3>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Alwar, Rajasthan • Hardware Store Owner • Household Income: ₹38,000/month • UPI Native</p>
+                            </div>
+                        </div>
+                        <div class="persona-body">
+                            <div class="persona-col">
+                                <h5>Pain Points & Anxieties</h5>
+                                <ul>
+                                    <li>Private coaching centers demand ₹2,000/month with zero individual attention.</li>
+                                    <li>Cannot assist his child in English-medium science beyond Class 7.</li>
+                                    <li>Worried that unstructured smartphone usage leads to gaming and distractions.</li>
+                                </ul>
+                                <div class="quote-box">"Main chahta hoon mera beta aage badhe, par coaching itni mehengi hai aur pata nahi chalta bacha seekh raha hai ya bas ratta maar raha hai."</div>
+                            </div>
+                            <div class="persona-col">
+                                <h5>Empathy & Behavior Map</h5>
+                                <ul>
+                                    <li><strong>Values:</strong> Academic discipline, tangible marks growth, cost transparency.</li>
+                                    <li><strong>Payment Habit:</strong> Regularly uses PhonePe/GooglePay for monthly bills under ₹500.</li>
+                                    <li><strong>Decision Driver:</strong> Trust recommendations from school teachers and fellow parents.</li>
+                                </ul>
+                            </div>
+                            <div class="persona-col">
+                                <h5>ShikshaSetu Feature Alignment</h5>
+                                <ul>
+                                    <li><strong>WhatsApp Weekly Card:</strong> Receives clear weekly updates on chapters mastered.</li>
+                                    <li><strong>Micro-Pricing:</strong> ₹149/month subscription fits easily within monthly family budgets.</li>
+                                    <li><strong>Controlled Study Mode:</strong> Pure educational focus with zero gaming or social media ads.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PERSONA 3: MEENAKSHI -->
+                    <div class="persona-card" style="border-top-color: var(--accent-green);">
+                        <div class="persona-header">
+                            <div class="avatar-container">
+                                <img 
+                                    class="persona-avatar-img" 
+                                    src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTFOEj6naq8fiRKGOt3p6gFgN2h-ISEajQQGICfck7TmD1pRwyfJd7b_QRt-IhYyRhJ3QT5gR9NIt--vek" 
+                                    alt="Smt. Meenakshi Sundaram - 38 year old Senior Science Teacher from Madurai"
+                                />
+                                <span class="location-tag" style="background: #047857;">Madurai</span>
+                            </div>
+                            <div class="persona-title">
+                                <span class="archetype" style="color: var(--accent-green);">Institutional Influencer Persona (Educator)</span>
+                                <h3>Smt. Meenakshi Sundaram • 38 yrs (Senior Science Teacher)</h3>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">Budget Private School, Madurai • 14 Years Experience • Teaching 200+ Students Daily</p>
+                            </div>
+                        </div>
+                        <div class="persona-body">
+                            <div class="persona-col">
+                                <h5>Pain Points & Anxieties</h5>
+                                <ul>
+                                    <li>Cannot offer individual remedial attention in packed 50-student classrooms.</li>
+                                    <li>Frustrated by notebooks filled with identical copied answers from Doubtnut.</li>
+                                    <li>Under pressure to complete syllabus while maintaining high pass rates.</li>
+                                </ul>
+                                <div class="quote-box">"When students copy answers directly from internet apps, their thinking ability dies. I need a companion that forces them to think."</div>
+                            </div>
+                            <div class="persona-col">
+                                <h5>Empathy & Behavior Map</h5>
+                                <ul>
+                                    <li><strong>Goals:</strong> Higher class conceptual understanding, active classroom discussions.</li>
+                                    <li><strong>Attitude to Tech:</strong> Welcomes AI if it reinforces pedagogy rather than facilitating cheating.</li>
+                                </ul>
+                            </div>
+                            <div class="persona-col">
+                                <h5>ShikshaSetu Feature Alignment</h5>
+                                <ul>
+                                    <li><strong>Anti-Cheating Guardrails:</strong> Guarantees students cannot print or copy direct answers.</li>
+                                    <li><strong>Class Misconception Insights:</strong> Shows which specific chapter topics confused most students during homework.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- 8. END-2-END PROJECT PLAN (COLLATERAL 2) -->
+            <!-- ========================================================================= -->
+            <section class="doc-section" id="sec-project-plan">
+                <div class="doc-section-header">
+                    <span class="collateral-tag">Collateral #8</span>
+                    <h2>End-to-End Project Plan (ELI5 Edition)</h2>
+                    <p>Conceptual Metaphors, Pedagogical Guardrails, and 12-Week Milestone Roadmap</p>
+                </div>
+                <div class="doc-section-body">
+                    <div class="story-box">
+                        <div class="story-headline">The Lego Castle Metaphor: Spoon-Feeding vs. Brain-Growing</div>
+                        <p>Imagine building a big Lego castle. If someone builds it for you in 5 seconds, you never learned how to build. <strong>ShikshaSetu is like a kind friend who shines a flashlight on the instructions and asks:</strong> <em>"Look at the shape of that yellow piece on page 4. Where do you think that fits?"</em> You snap it in yourself and shout, <strong>"I did it!"</strong></p>
+                    </div>
+
+                    <div class="section-block">
+                        <div class="block-title"><span>The 12-Week Construction Plan</span><span class="pill pill-blue">Timeline</span></div>
+                        <div class="milestone-timeline">
+                            <div class="milestone-item">
+                                <h4>Weeks 1–3: Stocking the Magic Library</h4>
+                                <p>Collect official NCERT Class 8 & 9 Science and Math books, chunk them into bite-sized concept cards, and store them in Astra Vector DB.</p>
+                            </div>
+                            <div class="milestone-item">
+                                <h4>Weeks 4–6: Teaching the Robot the Socratic Code</h4>
+                                <p>Design and test Langflow visual pipelines and prompt guardrails so OpenAI learns to provide gentle clues rather than complete answers.</p>
+                            </div>
+                            <div class="milestone-item">
+                                <h4>Weeks 7–9: Adding the Vernacular Voice & Camera</h4>
+                                <p>Build the photo-upload web screen and connect Indian voice models so students can talk in Hindi, Hinglish, and English.</p>
+                            </div>
+                            <div class="milestone-item">
+                                <h4>Weeks 10–12: Classroom Testing & Polish</h4>
+                                <p>Put the app in front of real 8th-grade students, measure their "Aha!" learning moments, fix confusing hints, and finalize capstone presentation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================================= -->
+            <!-- 9. TECHNICAL ARCHITECTURE (COLLATERAL 3) -->
+            <!-- ========================================================================= -->
+            <section class="doc-section" id="sec-technical-architecture">
+                <div class="doc-section-header">
+                    <span class="collateral-tag">Collateral #9</span>
+                    <h2>Technical Architecture & Prompt Engineering Specification</h2>
+                    <p>OpenAI Models, Astra DB Schemas, Langflow Nodes, and Production Prompts</p>
+                </div>
+                <div class="doc-section-body">
+                    <!-- ARCH DIAGRAM -->
+                    <div class="section-block">
+                        <div class="block-title"><span>High-Level 4-Tier Architecture</span><span class="pill pill-blue">System Design</span></div>
+                        <div class="arch-diagram">
+                            <div class="arch-layer">
+                                <div class="arch-layer-title"><span>Layer 1: Client Ingestion Tier</span><span class="pill pill-blue">Gateway</span></div>
+                                <div class="arch-grid">
+                                    <div class="arch-node"><h5>Next.js / React PWA</h5><p>Mobile-first camera capture, audio recording, step hint rendering.</p></div>
+                                    <div class="arch-node"><h5>WhatsApp Webhook</h5><p>Meta WhatsApp Business Cloud API / Twilio gateway.</p></div>
+                                    <div class="arch-node"><h5>FastAPI Controller</h5><p>Async JWT sessions and turn counters.</p></div>
+                                </div>
+                            </div>
+                            <div class="arch-layer">
+                                <div class="arch-layer-title"><span>Layer 2: Langflow Orchestration Tier</span><span class="pill pill-purple">Workflow Engine</span></div>
+                                <div class="arch-grid">
+                                    <div class="arch-node"><h5>Multimodal Vision Router</h5><p>OCR, diagram breakdown, grade tagging via GPT-4o Vision.</p></div>
+                                    <div class="arch-node"><h5>Vector Query Synthesizer</h5><p>Hybrid dense-sparse queries filtered by grade/chapter.</p></div>
+                                    <div class="arch-node"><h5>Socratic Controller</h5><p>Finite cognitive state machine (Clarify &rarr; Foundation &rarr; Scaffold &rarr; Validate).</p></div>
+                                </div>
+                            </div>
+                            <div class="arch-layer">
+                                <div class="arch-layer-title"><span>Layer 3: Knowledge & Storage Tier</span><span class="pill pill-orange">Vector DB</span></div>
+                                <div class="arch-grid">
+                                    <div class="arch-node"><h5>DataStax Astra Vector DB</h5><p>Serverless Cassandra vector engine for NCERT chunks.</p></div>
+                                    <div class="arch-node"><h5>text-embedding-3-small</h5><p>1536-dim dense vector embeddings with cosine indexing.</p></div>
+                                    <div class="arch-node"><h5>Redis State Cache</h5><p>Active context windows and hint progression trees.</p></div>
+                                </div>
+                            </div>
+                            <div class="arch-layer">
+                                <div class="arch-layer-title"><span>Layer 4: Cognitive & Safety Tier</span><span class="pill pill-green">GenAI Models</span></div>
+                                <div class="arch-grid">
+                                    <div class="arch-node"><h5>OpenAI GPT-4o-mini</h5><p>Socratic prompting, formula breakdown, dialectical synthesis.</p></div>
+                                    <div class="arch-node"><h5>Guardrail Node</h5><p>Zero-shot classifier checking zero answer leakage.</p></div>
+                                    <div class="arch-node"><h5>Bhashini TTS</h5><p>Converts vernacular hints into clear Hindi/Tamil audio.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ASTRA SCHEMA -->
+                    <div class="section-block">
+                        <div class="block-title"><span>Astra DB Vector Collection Schema</span><span class="pill pill-orange">Cassandra JSON</span></div>
+                        <div class="code-header"><span>Collection: ncert_curriculum_vectors</span><span>JSON API</span></div>
+<pre><code>{
+  "_id": "ncert_sci_g9_ch09_sec02_c04",
+  "$vector": [-0.0142, 0.0381, 0.0094, -0.0512, "...", 0.0219],
+  "grade": 9,
+  "subject": "Science",
+  "book_name": "NCERT Science Class 9",
+  "chapter_number": 9,
+  "chapter_title": "Force and Laws of Motion",
+  "section_heading": "9.2 First Law of Motion (Inertia)",
+  "concept_tags": ["inertia", "mass", "unbalanced_force"],
+  "blooms_taxonomy_level": "Understand",
+  "key_formulas": ["F = m * a"],
+  "vernacular_analogies": [
+    "Sudden braking of a state transport bus throwing standing passengers forward"
+  ],
+  "chunk_text": "An object remains in a state of rest or of uniform motion in a straight line unless compelled to change that state by an applied unbalanced force...",
+  "source_page": 118
+}</code></pre>
+                    </div>
+
+                    <!-- PROMPTS -->
+                    <div class="section-block">
+                        <div class="block-title"><span>Core Production Prompts</span><span class="pill pill-green">Prompt Engineering</span></div>
+                        <div class="code-header"><span>Task: Socratic Anti-Leak Dialogue Engine</span><span>Target: GPT-4o-mini</span></div>
+<pre><code>### SYSTEM IDENTITY
+You are "ShikshaSetu", an empathetic, patient, and encouraging AI study companion for Indian school students (Class 6–10). Your goal is to guide students to solve their homework problems independently using the Socratic method.
+
+### CRITICAL NEGATIVE CONSTRAINTS (UNBREAKABLE RULES)
+1. NEVER provide the final numerical answer, the complete formula substitution, or the full solution paragraph in a single turn.
+2. NEVER confirm the final answer until the student has stated the logic or calculation step themselves.
+3. If the student explicitly demands: "Just tell me the answer" or "Solve question 3", politely refuse and offer a simple first step:
+   - Example Refusal: "Arre, direct answer janne me wo maza kahan! Chalo saath me solve karte hain. Pehle mujhe batao problem me initial velocity (u) kya di hui hai?"
+4. Keep every response under 100 words. Ask exactly ONE guiding question at the end of each turn.
+
+### PEDAGOGICAL PROGRESSION WORKFLOW
+- Turn 1 (Clarify Variables): Ask the student to identify given data and what needs to be found.
+- Turn 2 (Connect to Principle): Ask which NCERT law or formula applies (use a simple Indian daily-life analogy).
+- Turn 3 (Scaffold the Math): Guide them through unit conversion or equation setup.
+- Turn 4 (Validate & Celebrate): When student arrives at correct result, praise effort and summarize key takeaway.
+
+### CONTEXT GROUNDING
+Grade: {{GRADE}} | Subject: {{SUBJECT}} | Chapter: {{CHAPTER_TITLE}}
+Curriculum Chunk: """{{NCERT_CHUNK_TEXT}}"""
+Student Message: "{{STUDENT_MESSAGE}}"
+Language: {{USER_LANGUAGE}} (Hindi, Hinglish, English)</code></pre>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<!-- Dynamic Navigation Highlighting Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const navLinks = document.querySelectorAll('.nav-menu li a');
+        const sections = document.querySelectorAll('.doc-section');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const currentId = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+    });
+</script>
+
+</body>
+</html>
