@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShikshaSetu — PM Capstone Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: rgba(23, 32, 54, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.2);
+      --secondary: #818cf8;
+      --accent-green: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-red: #f87171;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Ambient Background Effect */
+    .ambient-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(99, 102, 241, 0.04) 50%, transparent 80%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Deck Header & Footer */
+    header {
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--card-border);
+      z-index: 10;
+      background: rgba(9, 13, 22, 0.8);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #fff;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .deck-title {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .rubric-tag {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Presentation Area */
+    #deck-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(40px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 40px 60px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    /* Slide Header */
+    .slide-meta {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .slide-headline {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: #fff;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Slide Content Grids */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      flex: 1;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card ul {
+      list-style-type: none;
+    }
+
+    .card ul li {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .card ul li::before {
+      content: "•";
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .card strong {
+      color: var(--text-main);
+    }
+
+    /* Custom UI Components */
+    .pill {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .pill-green { background: rgba(52, 211, 153, 0.15); color: var(--accent-green); }
+    .pill-red { background: rgba(248, 113, 113, 0.15); color: var(--accent-red); }
+    .pill-blue { background: rgba(56, 189, 248, 0.15); color: var(--primary); }
+    .pill-amber { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      text-align: left;
+      padding: 8px 10px;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      vertical-align: middle;
+    }
+
+    td strong {
+      color: var(--text-main);
+    }
+
+    /* Transform Flow Diagram */
+    .transform-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      flex-wrap: wrap;
+    }
+
+    .flow-badge {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .flow-badge.old { background: rgba(248, 113, 113, 0.15); color: var(--accent-red); border: 1px solid rgba(248, 113, 113, 0.3); }
+    .flow-badge.new { background: rgba(52, 211, 153, 0.15); color: var(--accent-green); border: 1px solid rgba(52, 211, 153, 0.3); }
+    .flow-arrow { color: var(--text-dim); }
+
+    /* Architecture Visual */
+    .arch-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .arch-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-align: center;
+      width: 90%;
+      color: var(--text-main);
+    }
+
+    .arch-box.highlight {
+      border-color: var(--primary);
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .arch-dual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 90%;
+    }
+
+    /* Economics Box */
+    .metric-hero {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: rgba(56, 189, 248, 0.06);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .metric-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .metric-sub {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* Warning Callout */
+    .warning-box {
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      color: #fde68a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    /* Decision Grid */
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .decision-card {
+      padding: 14px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .decision-card h4 {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .decision-card p {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Presenter Notes Overlay */
+    .presenter-notes {
+      position: absolute;
+      bottom: 60px;
+      left: 60px;
+      right: 60px;
+      background: #0f172a;
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      padding: 16px 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      z-index: 100;
+      display: none;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .presenter-notes.visible {
+      display: block;
+    }
+
+    .notes-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer Controls */
+    footer {
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--card-border);
+      z-index: 10;
+      background: rgba(9, 13, 22, 0.9);
+    }
+
+    .slide-progress {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dot.active {
+      width: 24px;
+      border-radius: 4px;
+      background: var(--primary);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-notes {
+      color: var(--primary);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <header>
+    <div class="brand">
+      <span class="logo-badge">SHIKSHASETU</span>
+      <span class="deck-title">PM Capstone Defense</span>
+    </div>
+    <div id="rubric-badge" class="rubric-tag">Vision & Alignment — 10M</div>
+  </header>
+
+  <main id="deck-container">
+
+    <div class="slide active" data-note="“My starting point was not ‘Where can I use AI?’ It was a learning problem. Students already have access to answers. The missing layer is guided reasoning. So I designed ShikshaSetu around one principle: student thinking should be greater than the AI answer.”">
+      <div class="slide-meta">Slide 01 / 07 — Product Vision & Business Alignment</div>
+      <h1 class="slide-headline">“Students don't need another answer engine.<br>They need help learning how to reach the answer.”</h1>
+      
+      <div class="content-grid">
+        <div class="card" style="grid-column: span 4;">
+          <h3>The Critical Gap</h3>
+          <ul>
+            <li>Class 10 students frequently get stuck on difficult <strong>NCERT Science</strong> concepts.</li>
+            <li>Current EdTech tools optimize for <strong>answer retrieval</strong> rather than conceptual reasoning.</li>
+            <li>Creates high dependency on tuitions, parents, or copy-paste generative tools.</li>
+          </ul>
+          <div class="warning-box" style="margin-top: 15px;">
+            Core Principle: STUDENT THINKING &gt; AI ANSWER
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: span 4;">
+          <h3>The Socratic Mechanism</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Mobile-first homework companion initially grounded in Class 10 NCERT Science:</p>
+          <div class="transform-flow">
+            <div class="flow-row">
+              <span class="flow-badge old">STUCK</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-badge old">SEARCH</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-badge old">COPY</span>
+            </div>
+            <div style="font-size: 11px; color: var(--primary); font-weight: 700; text-align: center;">⬇️ ShikshaSetu Transformation</div>
+            <div class="flow-row">
+              <span class="flow-badge new">STUCK</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-badge new">THINK</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-badge new">SOLVE</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: span 4;">
+          <h3>Stakeholder Alignment</h3>
+          <table>
+            <thead>
+              <tr><th>Stakeholder</th><th>Value Realized</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Student</strong></td><td>Independent problem-solving & mastery</td></tr>
+              <tr><td><strong>Parent</strong></td><td>Affordable, accessible high-quality support</td></tr>
+              <tr><td><strong>School</strong></td><td>Reduces answer-copying; improves mastery</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" data-note="“This is where I think the analysis became strategically useful. I didn't conclude that every student is my customer. The segmentation shows that my value proposition is highly segment-dependent. Guidance-Seeking Gauri is the beachhead because the pain and the product mechanism reinforce each other. Answer-Seeking Aisha is actually a product-risk segment.”">
+      <div class="slide-meta">Slide 02 / 07 — Data-Driven Segmentation</div>
+      <h1 class="slide-headline">“The market is broad. The beachhead is not.”</h1>
+      
+      <div class="content-grid">
+        <div class="card" style="grid-column: span 4;">
+          <h3>Market Sizing Wedge</h3>
+          <div class="metric-hero">
+            <div class="metric-value">26.6 Lakh</div>
+            <div class="metric-sub">CBSE Class X Core Beachhead</div>
+          </div>
+          <ul>
+            <li><strong>Total Universe:</strong> ~1.75 Cr Class X students in India.</li>
+            <li><strong>Conservative Core:</strong> 26.6L CBSE students facing rigorous board examinations.</li>
+            <li><strong>Initial Wedge:</strong> Class 10 NCERT Science syllabus.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="grid-column: span 8;">
+          <h3>Behavioral Segmentation (K-Means on 10 Dimensions)</h3>
+          <table>
+            <thead>
+              <tr><th>Segment / Persona</th><th>Core Behaviour</th><th>Socratic Fit</th></tr>
+            </thead>
+            <tbody>
+              <tr style="background: rgba(52, 211, 153, 0.05);">
+                <td><strong>🟢 Socratic Seekers</strong><br>(Gauri)</td>
+                <td>Wants conceptual understanding; high repeat learning intent</td>
+                <td><span class="pill pill-green">5 / 5 (Beachhead)</span></td>
+              </tr>
+              <tr>
+                <td><strong>🔴 Instant Finishers</strong><br>(Aisha)</td>
+                <td>Wants fast homework completion; seeks final direct answer</td>
+                <td><span class="pill pill-red">1 / 5 (Friction Risk)</span></td>
+              </tr>
+              <tr>
+                <td><strong>🔵 Digital Natives</strong><br>(Ishaan)</td>
+                <td>Quick verification; digitally self-sufficient</td>
+                <td><span class="pill pill-blue">3 / 5</span></td>
+              </tr>
+              <tr>
+                <td><strong>🟡 Support-Reliant</strong><br>(Riya)</td>
+                <td>Guided support needed; higher language/access barriers</td>
+                <td><span class="pill pill-amber">3 / 5</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="warning-box">
+            ⚠️ Strategic Insight: The Socratic mechanism is a core differentiator for C1, but creates deliberate friction for C2. (Synthetic hypothesis — requires real pilot validation).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" data-note="“This is the key UX decision. If I simply made another ChatGPT-like homework solver, I would be competing on answer quality. Instead, I deliberately introduce controlled friction. The AI's job is to determine the smallest useful next reasoning step.”">
+      <div class="slide-meta">Slide 03 / 07 — AI-Powered Prototype</div>
+      <h1 class="slide-headline">“The AI magic is not generating the answer.<br>It is generating the next useful thought.”</h1>
+      
+      <div class="content-grid">
+        <div class="card" style="grid-column: span 4;">
+          <h3>User Journey Loop</h3>
+          <div style="font-size: 12.5px; line-height: 1.6; color: var(--text-muted);">
+            <p>1. Student submits NCERT Science doubt</p>
+            <p style="color: var(--primary);">↓ ShikshaSetu retrieves textbook context</p>
+            <p>2. AI asks <strong>one prerequisite question</strong></p>
+            <p style="color: var(--accent-green);">↓ Student reasons & responds</p>
+            <p>3. AI adapts step-by-step to response</p>
+            <p style="color: var(--accent-amber);">↓ Student discovers conclusion</p>
+            <p>4. AI validates concept mastery</p>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: span 4;">
+          <h3>Pedagogical Guardrails</h3>
+          <ul>
+            <li><strong>Strict single-turn question:</strong> Max 1 question at a time.</li>
+            <li><strong>No premature dumping:</strong> Zero direct answers before thought step.</li>
+            <li><strong>Dynamic branch adaptation:</strong> Handles correct, partial, or wrong reasoning.</li>
+            <li><strong>Loop termination:</strong> Validates once mastery is demonstrated.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="grid-column: span 4;">
+          <h3>MVP Walking Skeleton Scope</h3>
+          <div style="font-size: 12px; margin-bottom: 8px;">
+            <strong style="color: var(--accent-green);">IN MVP:</strong>
+            <p style="color: var(--text-muted);">NCERT Class 10 Science, Text chat, Vector retrieval, Conversation memory, Guided validation.</p>
+          </div>
+          <div style="font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
+            <strong style="color: var(--accent-red);">OUT OF SCOPE:</strong>
+            <p style="color: var(--text-muted);">Voice/Image input, broad curriculum, gamification, teacher dashboards, direct payments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" data-note="“The important architectural choice is not simply that I used a vector database. It is why I used it. The product is curriculum-bounded. RAG gives the tutoring model relevant NCERT context, while the Socratic layer controls how that knowledge is delivered.”">
+      <div class="slide-meta">Slide 04 / 07 — Technical Architecture</div>
+      <h1 class="slide-headline">“Ground the knowledge. Control the pedagogy.<br>Preserve the conversation.”</h1>
+      
+      <div class="content-grid">
+        <div class="card" style="grid-column: span 5;">
+          <h3>RAG Architecture</h3>
+          <div class="arch-container">
+            <div class="arch-box">Student Question</div>
+            <div style="color: var(--text-dim);">↓</div>
+            <div class="arch-dual">
+              <div class="arch-box">Vector Search<br><span style="color:var(--text-dim);font-size:9px;">(NCERT Chunks)</span></div>
+              <div class="arch-box">Memory State<br><span style="color:var(--text-dim);font-size:9px;">(Chat History)</span></div>
+            </div>
+            <div style="color: var(--text-dim);">↓</div>
+            <div class="arch-box highlight">Socratic Prompt + Guardrails</div>
+            <div style="color: var(--text-dim);">↓</div>
+            <div class="arch-box">LLM Generation (1 Step Forward)</div>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: span 7;">
+          <h3>Technical Risks & Mitigation Controls</h3>
+          <table>
+            <thead>
+              <tr><th>Technical Risk</th><th>Evaluation & Control Mechanism</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Answer Leakage</strong></td><td>Adversarial test prompts; strict Socratic system prompts</td></tr>
+              <tr><td><strong>Context Irrelevance</strong></td><td>Chunk-ranking evaluation against gold NCERT question set</td></tr>
+              <tr><td><strong>Repetitive Loops</strong></td><td>Multi-turn state tracking & stall-detection exit paths</td></tr>
+              <tr><td><strong>Hallucinations</strong></td><td>Curriculum-bounded retrieval context (RAG)</td></tr>
+              <tr><td><strong>Cost Explosion</strong></td><td>Token instrumentation & max session budget caps</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" data-note="“I deliberately haven't manufactured an ROI number. At this stage that would be false precision. I have established the economic model and identified the variables that need validation: actual AI cost, retention, price, conversion, acquisition cost and buyer willingness to pay.”">
+      <div class="slide-meta">Slide 05 / 07 — Business Value & CBA</div>
+      <h1 class="slide-headline">“Validate learning economics before optimizing revenue.”</h1>
+      
+      <div class="content-grid">
+        <div class="card" style="grid-column: span 4;">
+          <h3>Business Model Hypotheses</h3>
+          <ul>
+            <li><strong>Primary User:</strong> Class 10 Student</li>
+            <li><strong>Economic Buyer:</strong> Parent (WTP driven by board exam stakes)</li>
+            <li><strong>B2B Channel:</strong> Schools seeking homework support integrity</li>
+            <li><strong>Pricing Hypothesis:</strong> ₹149 / month subscription</li>
+          </ul>
+        </div>
+
+        <div class="card" style="grid-column: span 4;">
+          <h3>Unit Economic Model (Planning)</h3>
+          <div class="metric-hero">
+            <div class="metric-value">₹123.80</div>
+            <div class="metric-sub">Est. Gross Contribution / Student / Month</div>
+          </div>
+          <ul style="font-size: 12.5px;">
+            <li>Direct API Cost: <strong>₹0.42</strong> / 5-turn session</li>
+            <li>Monthly Volume (60 sessions): <strong>₹25.20</strong> API Cost</li>
+            <li>Gross Margin Pre-OpEx: <strong>~83%</strong></li>
+          </ul>
+        </div>
+
+        <div class="card" style="grid-column: span 4;">
+          <h3>CBA Reality Check</h3>
+          <div class="warning-box" style="margin-bottom: 10px;">
+            ⚠️ Defensible ROI cannot be claimed without pilot CAC & retention data.
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">
+            <strong>Key Pilot Variable:</strong> Can repeated learning value create sufficient organic retention to offset CAC and operating fixed costs?
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" data-note="“My experimentation strategy is designed to kill the idea quickly if the core hypothesis is wrong. If students don't want Socratic guidance, I don't want to discover that after building the entire platform. And because we're dealing with minors, growth cannot override safety or privacy guardrails.”">
+      <div class="slide-meta">Slide 06 / 07 — Experimentation & Governance</div>
+      <h1 class="slide-headline">“The MVP is not the finish line.<br>It is the learning machine.”</h1>
+      
+      <div class="content-grid">
+        <div class="card" style="grid-column: span 4;">
+          <h3>Riskiest Assumptions</h3>
+          <ol style="padding-left: 18px; font-size: 12.5px; color: var(--text-muted); line-height: 1.5;">
+            <li>Do students actually want guided reasoning over fast answers?</li>
+            <li>Does Socratic guidance teach without abandonment?</li>
+            <li>Can the LLM avoid answer leaks consistently?</li>
+            <li>Will parents pay for conceptual growth?</li>
+          </ol>
+        </div>
+
+        <div class="card" style="grid-column: span 4;">
+          <h3>Validation Metrics Hierarchy</h3>
+          <ul>
+            <li><strong style="color:var(--primary);">North Star:</strong> Guided Learning Completion Rate</li>
+            <li><strong>Engagement:</strong> Socratic Continuation Rate (&gt;3 turns)</li>
+            <li><strong>Quality:</strong> Answer-Leak Rate (&lt;5% on Gold Set)</li>
+            <li><strong>Unit Cost:</strong> API Cost per Completed Session (&lt;₹0.50)</li>
+          </ul>
+        </div>
+
+        <div class="card" style="grid-column: span 4;">
+          <h3>Responsible AI for Minors</h3>
+          <div class="warning-box" style="margin-bottom: 10px;">
+            Child Safety & Data Privacy Guardrails
+          </div>
+          <ul style="font-size: 12px;">
+            <li>Strict session isolation & zero PII storage</li>
+            <li>Automated toxicity & out-of-curriculum content filtering</li>
+            <li>Parental consent & transparent failure fallback states</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" data-note="“So my recommendation is not ‘scale ShikshaSetu.’ My recommendation is ‘run the right pilot.’ If the Socratic mechanism produces repeatable learning value, we have something worth scaling. If students reject it, I want that evidence early. That is the product decision this entire lifecycle is designed to enable.”">
+      <div class="slide-meta">Slide 07 / 07 — Decision & Next Steps</div>
+      <h1 class="slide-headline">“Prove the learning loop before scaling the business.”</h1>
+      
+      <div class="content-grid">
+        <div class="card" style="grid-column: span 12; margin-bottom: 5px;">
+          <h3>Stage-Gate Pilot Decision Framework</h3>
+          <div class="decision-grid">
+            <div class="decision-card" style="border-top: 3px solid var(--accent-green);">
+              <h4 style="color: var(--accent-green);">GO</h4>
+              <p>Strong Socratic continuation, verified conceptual learning gain, and positive parent WTP.</p>
+            </div>
+            <div class="decision-card" style="border-top: 3px solid var(--primary);">
+              <h4 style="color: var(--primary);">ITERATE</h4>
+              <p>Learning value exists but UX friction, context retrieval, or session cost requires tuning.</p>
+            </div>
+            <div class="decision-card" style="border-top: 3px solid var(--accent-amber);">
+              <h4 style="color: var(--accent-amber);">PIVOT</h4>
+              <p>Problem confirmed, but real-time Socratic chat creates unsustainable student drop-off.</p>
+            </div>
+            <div class="decision-card" style="border-top: 3px solid var(--accent-red);">
+              <h4 style="color: var(--accent-red);">STOP</h4>
+              <p>Students reject guided thinking, or safety/cost thresholds fail to meet guardrails.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: span 12; text-align: center; justify-content: center; background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2);">
+          <p style="font-size: 16px; font-weight: 700; color: #fff;">
+            “I am not trying to prove that AI can answer a Science question.<br>
+            I am trying to prove that AI can help a student learn to answer it.”
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="presenter-notes-box" class="presenter-notes">
+    <div class="notes-tag">Presenter Script (Press 'N' to close)</div>
+    <div id="notes-content">Notes content goes here.</div>
+  </div>
+
+  <footer>
+    <div class="slide-progress" id="progress-dots"></div>
+    <div class="controls">
+      <button class="btn btn-notes" id="toggle-notes-btn">Notes [N]</button>
+      <button class="btn" id="prev-btn">← Prev</button>
+      <button class="btn" id="next-btn">Next →</button>
+    </div>
+  </footer>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const rubricBadge = document.getElementById('rubric-badge');
+    const notesBox = document.getElementById('presenter-notes-box');
+    const notesContent = document.getElementById('notes-content');
+    const progressContainer = document.getElementById('progress-dots');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const toggleNotesBtn = document.getElementById('toggle-notes-btn');
+
+    let currentSlide = 0;
+
+    // Build Progress Dots
+    slides.forEach((_, idx) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (idx === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(idx));
+      progressContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function updateSlide() {
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === currentSlide);
+        dots[idx].classList.toggle('active', idx === currentSlide);
+      });
+
+      const activeSlide = slides[currentSlide];
+      rubricBadge.textContent = activeSlide.getAttribute('data-rubric');
+      notesContent.textContent = activeSlide.getAttribute('data-note');
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < slides.length) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleNotes() {
+      notesBox.classList.toggle('visible');
+    }
+
+    // Event Listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    toggleNotesBtn.addEventListener('click', toggleNotes);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      }
+    });
+
+    // Initial load
+    updateSlide();
+  </script>
+</body>
+</html>
